@@ -10,22 +10,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // Responsável por fazer as animações
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Responsável por fazer o bootstrap do Collapse
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 // Componentes criados
 import { EventosComponent } from './eventos/eventos.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventosComponent,
-    PalestrantesComponent
+    PalestrantesComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CollapseModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
