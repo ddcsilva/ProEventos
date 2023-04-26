@@ -2,49 +2,57 @@
 
 <hr>
 
-<form class="row row-cols-lg-auto g-3 align-items-center" action="">
-    <div>
-      <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Buscar" />
-      </div>
+<div class="row row-cols-lg-auto g-3 align-items-center">
+  <div>
+    <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="filtroLista" />
     </div>
-    <div>
-      <button type="submit" class="btn btn-outline-success">Buscar</button>
-    </div>
-  </form>
-  <hr>
- 
-  <table class="table">
-    <thead class="table-dark">
-      <tr>
-        <th class="text-center" scope="col">#</th>
-        <th class="text-center" scope="col">Imagem</th>
-        <th class="text-center" scope="col">Tema</th>
-        <th class="text-center" scope="col">Local</th>
-        <th class="text-center" scope="col">Data</th>
-        <th class="text-center" scope="col">Pessoas</th>
-        <th class="text-center" scope="col">Lote</th>
-        <th class="text-center" scope="col">Opções</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let evento of eventos">
-        <th class="text-center" scope="row">{{evento.id}}</th>
-        <td class="text-center">{{evento.imagemURL}}</td>
-        <td class="text-center">{{evento.tema}}</td>
-        <td class="text-center">{{evento.local}}</td>
-        <td class="text-center">{{evento.dataEvento}}</td>
-        <td class="text-center">{{evento.quantidadePessoas}}</td>
-        <td class="text-center">{{evento.lote}}</td>
-        <td class="text-center">
-          <button class="btn btn-outline-primary btn-sm">Editar</button>
-          <button class="btn btn-outline-danger btn-sm">Excluir</button>
-      </tr>
-    </tbody>
-    <tfoot *ngIf="eventos.length == 0">
-      <tr>
-        <td colspan="8" class="text-center">Nenhum evento cadastrado</td>
-      </tr>
-    </tfoot>
-  </table>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-outline-success">Buscar</button>
+  </div>
+</div>
+<hr>
+<h3>Filtro: {{filtroLista}}</h3>
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th class="text-center" scope="col"><button class="btn btn-outline-light btn-sm"
+          (click)="alternarImagem()">{{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Tema</th>
+      <th class="text-center" scope="col">Local</th>
+      <th class="text-center" scope="col">Data</th>
+      <th class="text-center" scope="col">Pessoas</th>
+      <th class="text-center" scope="col">Lote</th>
+      <th class="text-center" scope="col">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let evento of eventos">
+      <td class="text-center">
+        <div [collapse]="!mostrarImagem" [isAnimated]="true">
+          <img src="/assets/images/{{evento.imagemURL}}" [style.width.px]="tamanhoImagem"
+            [style.margin.px]="margemImagem" alt="Imagem do evento">
+        </div>
+      </td>
+      <th class="text-center" scope="row">{{evento.id}}</th>
+      <td class="text-center">{{evento.tema}}</td>
+      <td class="text-center">{{evento.local}}</td>
+      <td class="text-center">{{evento.dataEvento}}</td>
+      <td class="text-center">{{evento.quantidadePessoas}}</td>
+      <td class="text-center">{{evento.lote}}</td>
+      <td class="text-center">
+        <button class="btn btn-outline-primary btn-sm">Editar</button>
+        <button class="btn btn-outline-danger btn-sm">Excluir</button>
+      </td>
+    </tr>
+
+  </tbody>
+  <tfoot *ngIf="eventos.length == 0">
+    <tr>
+      <td colspan="8" class="text-center">Nenhum evento cadastrado</td>
+    </tr>
+  </tfoot>
+</table>

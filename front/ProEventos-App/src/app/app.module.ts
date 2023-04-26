@@ -10,8 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // Responsável por fazer as animações
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Responsável por fazer o bootstrap do Collapse
+// Responsável por fazer o menu com efeito de collapse
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+// Responsável por permitir a utilização de formulários
+import { FormsModule } from '@angular/forms';
 
 // Componentes criados
 import { EventosComponent } from './eventos/eventos.component';
@@ -32,7 +34,8 @@ import { NavComponent } from './nav/nav.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    FormsModule
   ],
   // Responsável por importar os provedores de serviços
   providers: [],
