@@ -21,6 +21,7 @@
         <th class="text-center" scope="col">#</th>
         <th class="text-center" scope="col">Imagem</th>
         <th class="text-center" scope="col">Tema</th>
+        <th class="text-center" scope="col">Local</th>
         <th class="text-center" scope="col">Data</th>
         <th class="text-center" scope="col">Pessoas</th>
         <th class="text-center" scope="col">Lote</th>
@@ -28,14 +29,22 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th class="text-center" scope="row">1</th>
-        <td class="text-center">A</td>
-        <td class="text-center">B</td>
-        <td class="text-center">C</td>
-        <td class="text-center">D</td>
-        <td class="text-center">E</td>
-        <td class="text-center">F</td>
+      <tr *ngFor="let evento of eventos">
+        <th class="text-center" scope="row">{{evento.id}}</th>
+        <td class="text-center">{{evento.imagemURL}}</td>
+        <td class="text-center">{{evento.tema}}</td>
+        <td class="text-center">{{evento.local}}</td>
+        <td class="text-center">{{evento.dataEvento}}</td>
+        <td class="text-center">{{evento.quantidadePessoas}}</td>
+        <td class="text-center">{{evento.lote}}</td>
+        <td class="text-center">
+          <button class="btn btn-outline-primary btn-sm">Editar</button>
+          <button class="btn btn-outline-danger btn-sm">Excluir</button>
       </tr>
     </tbody>
+    <tfoot *ngIf="eventos.length == 0">
+      <tr>
+        <td colspan="8" class="text-center">Nenhum evento cadastrado</td>
+      </tr>
+    </tfoot>
   </table>
