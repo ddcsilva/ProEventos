@@ -30,7 +30,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let evento of eventos">
+    <tr *ngFor="let evento of eventosFiltrados">
       <td class="text-center">
         <div [collapse]="!mostrarImagem" [isAnimated]="true">
           <img src="/assets/images/{{evento.imagemURL}}" [style.width.px]="tamanhoImagem"

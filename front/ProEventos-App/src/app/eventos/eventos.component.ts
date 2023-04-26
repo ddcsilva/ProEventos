@@ -9,10 +9,30 @@ import { Component, OnInit } from '@angular/core';
 export class EventosComponent implements OnInit {
 
   public eventos: any = [];
-  tamanhoImagem: number = 150;
-  margemImagem: number = 2;
-  mostrarImagem: boolean = true;
-  filtroLista: string = '';
+  public eventosFiltrados: any = [];
+  public tamanhoImagem: number = 150;
+  public margemImagem: number = 2;
+  public mostrarImagem: boolean = true;
+  private _filtroLista: string = '';
+
+  public get filtroLista(): string {
+    return this._filtroLista;
+  }
+
+  public set filtroLista(value: string) {
+    this._filtroLista = value;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
+  }
+
+  public filtrarEventos(filtrarPor: string): any {
+    // toLocaleLowerCase() converte a string para minúsculo
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    // filter() filtra os elementos de um array
+    // indexOf() retorna o índice da primeira ocorrência do valor especificado
+    return this.eventos.filter(
+      (evento: { tema: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -32,7 +52,7 @@ export class EventosComponent implements OnInit {
       // Se o retorno for bem sucedido, o método next é executado
       next: (response: any) => {
         this.eventos = response;
-        console.log(this.eventos[1].imagemURL)
+        this.eventosFiltrados = this.eventos;
       },
       // Se ocorrer algum erro, o método error é executado
       error: (error: any) => {
