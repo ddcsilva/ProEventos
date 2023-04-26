@@ -5,7 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
+// Classe responsável por gerenciar o componente de navegação
 export class NavComponent implements OnInit {
+  // Variável responsável por armazenar o estado do Collapse
   isCollapsed = true;
 
   constructor() { }
