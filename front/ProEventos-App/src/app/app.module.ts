@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 // Responsável por fazer o bootstrap da aplicação
 import { AppComponent } from './app.component';
+// Responsável por fazer as animações
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Componentes criados
 import { EventosComponent } from './eventos/eventos.component';
@@ -22,7 +24,8 @@ import { PalestrantesComponent } from './palestrantes/palestrantes.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
