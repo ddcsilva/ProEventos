@@ -1,3 +1,5 @@
+// Arquivo responsável por carregar os polyfills necessários para o Angular e é carregado antes do aplicativo.
+
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.

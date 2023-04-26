@@ -7,4 +7,6 @@ const routes: Routes = [];
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
+// Responsável por fazer o roteamento da aplicação
 export class AppRoutingModule { }

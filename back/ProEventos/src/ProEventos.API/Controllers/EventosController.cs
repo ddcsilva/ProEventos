@@ -3,6 +3,10 @@ using ProEventos.API.Models;
 using ProEventos.Data;
 
 namespace ProEventos.API.Controllers;
+
+/// <summary>
+/// Controller responsável pelos endpoints de Eventos
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class EventosController : ControllerBase
@@ -14,18 +18,27 @@ public class EventosController : ControllerBase
         _context = context;
     }
 
+    /// <summary>
+    /// Retorna todos os eventos
+    /// </summary>
+    /// <returns>Lista de eventos</returns>
     [HttpGet]
     public IEnumerable<Evento> Get()
     {
         return _context.Eventos;
     }
 
+    /// <summary>
+    /// Retorna um evento por id
+    /// </summary>
+    /// <param name="id">Id do evento</param>
+    /// <returns>Evento</returns>
     [HttpGet("{id}")]
     public Evento GetById(int id)
     {
         return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
     }
-
+    
     [HttpPost]
     public string Post()
     {

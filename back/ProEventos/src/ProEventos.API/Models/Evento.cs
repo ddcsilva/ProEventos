@@ -1,5 +1,8 @@
 namespace ProEventos.API.Models;
 
+/// <summary>
+/// Classe responsável pelo modelo de Evento
+/// </summary>
 public class Evento
 {
     public int Id { get; set; }

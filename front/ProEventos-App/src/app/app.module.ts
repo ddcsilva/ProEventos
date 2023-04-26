@@ -30,4 +30,6 @@ import { PalestrantesComponent } from './palestrantes/palestrantes.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
+// Responsável por importar os módulos e componentes
 export class AppModule { }
