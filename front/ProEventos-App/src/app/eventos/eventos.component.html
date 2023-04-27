@@ -6,6 +6,7 @@
   <div>
     <div class="input-group">
       <label class="input-group-text">Filtro</label>
+      <!-- NgModel é uma diretiva que faz o binding de dados entre o componente e a view -->
       <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="filtroLista" />
     </div>
   </div>
@@ -14,6 +15,7 @@
 <table class="table">
   <thead class="table-dark">
     <tr>
+      <!-- O evento click do botão chama o método alternarImagem() -->
       <th class="text-center" scope="col"><button class="btn btn-outline-light btn-sm"
           (click)="alternarImagem()">{{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
       <th class="text-center" scope="col">#</th>
@@ -26,9 +28,12 @@
     </tr>
   </thead>
   <tbody>
+    <!-- O *ngFor é uma diretiva que faz o loop dos elementos de uma coleção -->
     <tr *ngFor="let evento of eventosFiltrados">
       <td class="text-center">
+        <!-- Se a variável mostrarImagem for verdadeira, a imagem é exibida e animada -->
         <div [collapse]="!mostrarImagem" [isAnimated]="true">
+          <!-- As propriedades [style.width.px] e [style.margin.px] são diretivas que permitem alterar o estilo de um elemento HTML -->
           <img class="thumbnail" src="/assets/images/{{evento.imagemURL}}" [style.width.px]="tamanhoImagem"
             [style.margin.px]="margemImagem" alt="Imagem do evento">
         </div>
@@ -46,6 +51,7 @@
     </tr>
 
   </tbody>
+  <!-- Se a lista de eventos estiver vazia, exibe uma mensagem -->
   <tfoot *ngIf="eventos.length == 0">
     <tr>
       <td colspan="8" class="text-center">Nenhum evento cadastrado</td>

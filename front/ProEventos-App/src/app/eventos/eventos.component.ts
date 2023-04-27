@@ -13,17 +13,20 @@ export class EventosComponent implements OnInit {
   public tamanhoImagem: number = 150;
   public margemImagem: number = 2;
   public mostrarImagem: boolean = true;
+
   private _filtroLista: string = '';
 
   public get filtroLista(): string {
     return this._filtroLista;
   }
 
+  // Se a propriedade filtroLista tiver um valor, o método filtrarEventos() é executado
   public set filtroLista(value: string) {
     this._filtroLista = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
+  // Método para filtrar os eventos
   public filtrarEventos(filtrarPor: string): any {
     // toLocaleLowerCase() converte a string para minúsculo
     filtrarPor = filtrarPor.toLocaleLowerCase();
