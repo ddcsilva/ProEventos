@@ -4,17 +4,13 @@
 
 <div class="row row-cols-lg-auto g-3 align-items-center">
   <div>
-    <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
     <div class="input-group">
+      <label class="input-group-text">Filtro</label>
       <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="filtroLista" />
     </div>
   </div>
-  <div>
-    <button type="submit" class="btn btn-outline-success">Buscar</button>
-  </div>
 </div>
 <hr>
-<h3>Filtro: {{filtroLista}}</h3>
 <table class="table">
   <thead class="table-dark">
     <tr>
@@ -44,8 +40,8 @@
       <td class="text-center">{{evento.quantidadePessoas}}</td>
       <td class="text-center">{{evento.lote}}</td>
       <td class="text-center">
-        <button class="btn btn-outline-primary btn-sm">Editar</button>
-        <button class="btn btn-outline-danger btn-sm">Excluir</button>
+        <button class="btn btn-primary btn-sm me-2">Editar</button>
+        <button class="btn btn-danger btn-sm">Excluir</button>
       </td>
     </tr>
 
