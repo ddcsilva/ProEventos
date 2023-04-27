@@ -1,0 +1,9 @@
+.thumbnail {
+    width: 20vw;
+    height: calc(20vw * 2 / 4);
+    max-width: 300px;
+    max-height: calc(300px * 2 / 4);
+    min-width: 150px;
+    min-height: calc(150px * 2 / 4);
+    object-fit: cover;
+}
