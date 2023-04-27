@@ -1,8 +1,7 @@
 namespace ProEventos.Domain.Models;
 
-public class Lote
+public class Lote : BaseEntity
 {
-    public int Id { get; set; }
     public string Nome { get; set; }
     public decimal Preco { get; set; }
     public DateTime? DataInicio { get; set; }

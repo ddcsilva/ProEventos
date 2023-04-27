@@ -1,6 +1,6 @@
 namespace ProEventos.Domain.Models;
 
-public class PalestranteEvento
+public class PalestranteEvento : BaseEntity
 {
     public int PalestranteId { get; set; }
     public Palestrante Palestrante { get; set; }

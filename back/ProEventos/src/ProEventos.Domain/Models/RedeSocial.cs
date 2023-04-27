@@ -1,8 +1,7 @@
 namespace ProEventos.Domain.Models;
 
-public class RedeSocial
+public class RedeSocial : BaseEntity
 {
-    public int Id { get; set; }
     public string Nome { get; set; }
     public string URL { get; set; }
     public int? EventoId { get; set; }
