@@ -4,7 +4,7 @@ using ProEventos.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Adicionando o contexto do banco de dados
-builder.Services.AddDbContext<DataContext>(options =>
+builder.Services.AddDbContext<ProEventosContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Adiciona o supporte a controllers
