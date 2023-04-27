@@ -12,7 +12,7 @@ using ProEventos.Data.Contexts;
 namespace ProEventos.Data.Migrations
 {
     [DbContext(typeof(ProEventosContext))]
-    [Migration("20230427010808_Initial")]
+    [Migration("20230427011314_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
