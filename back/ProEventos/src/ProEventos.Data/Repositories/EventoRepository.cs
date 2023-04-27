@@ -9,7 +9,7 @@ public class EventoRepository : Repository<Evento>, IEventoRepository
 {
     public EventoRepository(ProEventosContext context) : base(context) { }
 
-    public async Task<Evento[]> ObterTodosEventosAsync(bool incluirPalestrantes = false)
+    public async Task<IEnumerable<Evento>> ObterTodosEventosAsync(bool incluirPalestrantes = false)
     {
         IQueryable<Evento> query = _context.Eventos
             .Include(e => e.Lotes)
@@ -47,7 +47,7 @@ public class EventoRepository : Repository<Evento>, IEventoRepository
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<Evento[]> ObterTodosEventosPorTemaAsync(string tema, bool incluirPalestrantes = false)
+    public async Task<IEnumerable<Evento>> ObterTodosEventosPorTemaAsync(string tema, bool incluirPalestrantes = false)
     {
         IQueryable<Evento> query = _context.Eventos
             .Include(e => e.Lotes)

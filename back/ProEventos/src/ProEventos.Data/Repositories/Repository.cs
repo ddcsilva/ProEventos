@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ProEventos.Data.Contexts;
 using ProEventos.Domain.Interfaces.Repositories;
@@ -38,6 +39,11 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
     {
         _dbSet.RemoveRange(entityArray);
         await SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
     }
 
     public virtual async Task<bool> SaveChangesAsync()

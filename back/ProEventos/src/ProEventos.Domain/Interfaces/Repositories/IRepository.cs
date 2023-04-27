@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using ProEventos.Domain.Models;
 
 namespace ProEventos.Domain.Interfaces.Repositories;
@@ -30,6 +31,13 @@ public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity
     /// </summary>
     /// <param name="entityArray">Array de entidades a serem deletadas.</param>
     Task RemoverVariosAsync(TEntity[] entityArray);
+
+    /// <summary>
+    /// Método genérico para buscar entidades que atendam a um predicado.
+    /// </summary>
+    /// <param name="predicate">Predicado a ser atendido.</param>
+    /// <returns>Retorna uma lista de entidades que atendam ao predicado.</returns>
+    Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate);
 
     /// <summary>
     /// Método para salvar as alterações no banco de dados.
