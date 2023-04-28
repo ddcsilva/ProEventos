@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using ProEventos.Domain.Interfaces.Helpers;
 using ProEventos.Domain.Models;
-using ProEventos.Data.Contexts;
+using ProEventos.Domain.Services;
 
 namespace ProEventos.API.Controllers;
 
@@ -9,13 +10,14 @@ namespace ProEventos.API.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
-public class EventosController : ControllerBase
+public class EventosController : MainController
 {
-    private readonly ProEventosContext _context;
+    private readonly IEventoService _eventoService;
 
-    public EventosController(ProEventosContext context)
+    public EventosController(INotificador notificador,
+                             IEventoService eventoService) : base(notificador)
     {
-        _context = context;
+        _eventoService = eventoService;
     }
 
     /// <summary>
@@ -23,37 +25,151 @@ public class EventosController : ControllerBase
     /// </summary>
     /// <returns>Lista de eventos</returns>
     [HttpGet]
-    public IEnumerable<Evento> Get()
+    public async Task<ActionResult<IEnumerable<Evento>>> ObterTodosEventosAsync()
     {
-        return _context.Eventos;
+        try
+        {
+            var eventos = await _eventoService.ObterTodosEventosAsync();
+            return CustomResponse(eventos);
+        }
+        catch (Exception ex)
+        {
+            NotificarErro($"Erro ao tentar obter eventos. Erro: {ex.Message}");
+            return CustomResponse(null, statusCode: 500);
+        }
     }
 
     /// <summary>
-    /// Retorna um evento por id
+    /// Retorna um evento pelo seu Id
     /// </summary>
     /// <param name="id">Id do evento</param>
     /// <returns>Evento</returns>
     [HttpGet("{id}")]
-    public Evento GetById(int id)
+    public async Task<ActionResult<Evento>> ObterEventoPorIdAsync(int id)
     {
-        return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
+        try
+        {
+            var evento = await _eventoService.ObterEventoPorIdAsync(id);
+
+            if (evento == null) return NotFound("Evento não encontrado.");
+
+            return Ok(evento);
+        }
+        catch (Exception ex)
+        {
+            NotificarErro($"Erro ao tentar obter um evento. Erro: {ex.Message}");
+            return CustomResponse(null, statusCode: 500);
+        }
     }
-    
+
+    /// <summary>
+    /// Retorna um evento pelo seu tema
+    /// </summary>
+    /// <param name="tema">Tema do evento</param>
+    /// <returns>Evento</returns>
+    [HttpGet("tema/{tema}")]
+    public async Task<ActionResult<Evento>> ObterEventoPorTemaAsync(string tema)
+    {
+        try
+        {
+            var evento = await _eventoService.ObterTodosEventosPorTemaAsync(tema, true);
+
+            if (evento == null) return NotFound("Evento não encontrado.");
+
+            return Ok(evento);
+        }
+        catch (Exception ex)
+        {
+            NotificarErro($"Erro ao tentar obter um evento. Erro: {ex.Message}");
+            return CustomResponse(null, statusCode: 500);
+        }
+    }
+
+    /// <summary>
+    /// Adiciona um novo evento
+    /// </summary>
+    /// <param name="evento">Evento a ser adicionado</param>
+    /// <returns>Evento</returns>
     [HttpPost]
-    public string Post()
+    public async Task<ActionResult<Evento>> AdicionarEventoAsync(Evento evento)
     {
-        return "Exemplo de Post";
+        try
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            await _eventoService.AdicionarAsync(evento);
+
+            return CustomResponse(evento);
+        }
+        catch (Exception ex)
+        {
+            NotificarErro($"Erro ao tentar adicionar evento. Erro: {ex.Message}");
+            return CustomResponse(null, statusCode: 500);
+        }
     }
 
+    /// <summary>
+    /// Atualiza um evento
+    /// </summary>
+    /// <param name="id">Id do evento</param>
+    /// <param name="evento">Evento a ser atualizado</param>
+    /// <returns>Evento</returns>
     [HttpPut("{id}")]
-    public string Put(int id)
+    public async Task<ActionResult<Evento>> AtualizarEventoAsync(int id, Evento evento)
     {
-        return $"Exemplo de Put com id = {id}";
+        try
+        {
+            if (id != evento.Id)
+            {
+                NotificarErro("O id informado não é o mesmo que foi passado na query");
+                return CustomResponse();
+            }
+
+            var eventoAtualizado = await _eventoService.ObterEventoPorIdAsync(id);
+
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            eventoAtualizado.Tema = evento.Tema;
+            eventoAtualizado.Local = evento.Local;
+            eventoAtualizado.QuantidadePessoas = evento.QuantidadePessoas;
+            eventoAtualizado.DataEvento = evento.DataEvento;
+            eventoAtualizado.ImagemURL = evento.ImagemURL;
+            eventoAtualizado.Telefone = evento.Telefone;
+            eventoAtualizado.Email = evento.Email;
+
+            await _eventoService.AtualizarAsync(eventoAtualizado);
+
+            return CustomResponse(evento);
+        }
+        catch (Exception ex)
+        {
+            NotificarErro($"Erro ao tentar atualizar evento. Erro: {ex.Message}");
+            return CustomResponse(null, statusCode: 500);
+        }
     }
 
+    /// <summary>
+    /// Remove um evento
+    /// </summary>
+    /// <param name="id">Id do evento</param>
+    /// <returns>Evento</returns>
     [HttpDelete("{id}")]
-    public string Delete(int id)
+    public async Task<ActionResult<Evento>> RemoverEventoAsync(int id)
     {
-        return $"Exemplo de Delete com id = {id}";
+        try
+        {
+            var evento = await _eventoService.ObterEventoPorIdAsync(id);
+
+            if (evento == null) return NotFound("Evento não encontrado.");
+
+            await _eventoService.RemoverAsync(id);
+
+            return CustomResponse(evento);
+        }
+        catch (Exception ex)
+        {
+            NotificarErro($"Erro ao tentar remover evento. Erro: {ex.Message}");
+            return CustomResponse(null, statusCode: 500);
+        }
     }
 }

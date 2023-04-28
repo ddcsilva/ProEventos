@@ -64,11 +64,29 @@ public class EventoService : BaseService, IEventoService
 
     public async Task<Evento> ObterEventoPorIdAsync(int eventoId, bool incluirPalestrantes = false)
     {
+        if (_eventoRepository.BuscarAsync(e => e.Id == eventoId).Result.Any())
+        {
+            Notificar("Não foi possível encontrar o evento.");
+            return null;
+        }
+
         return await _eventoRepository.ObterEventoPorIdAsync(eventoId, incluirPalestrantes);
     }
 
     public async Task<IEnumerable<Evento>> ObterTodosEventosPorTemaAsync(string tema, bool incluirPalestrantes = false)
     {
+        if (_eventoRepository.BuscarAsync(e => e.Tema == tema).Result.Any())
+        {
+            Notificar("Não foi possível encontrar o evento.");
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(tema))
+        {
+            Notificar("Tema não pode ser vazio.");
+            return null;
+        }
+
         return await _eventoRepository.ObterTodosEventosPorTemaAsync(tema, incluirPalestrantes);
     }
 }
