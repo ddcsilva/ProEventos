@@ -12,6 +12,7 @@ public class EventoRepository : Repository<Evento>, IEventoRepository
     public async Task<IEnumerable<Evento>> ObterTodosEventosAsync(bool incluirPalestrantes = false)
     {
         IQueryable<Evento> query = _context.Eventos
+            .AsNoTracking()
             .Include(e => e.Lotes)
             .Include(e => e.RedesSociais);
 
@@ -30,6 +31,7 @@ public class EventoRepository : Repository<Evento>, IEventoRepository
     public async Task<Evento> ObterEventoPorIdAsync(int eventoId, bool incluirPalestrantes = false)
     {
         IQueryable<Evento> query = _context.Eventos
+            .AsNoTracking()
             .Include(e => e.Lotes)
             .Include(e => e.RedesSociais);
 
@@ -50,6 +52,7 @@ public class EventoRepository : Repository<Evento>, IEventoRepository
     public async Task<IEnumerable<Evento>> ObterTodosEventosPorTemaAsync(string tema, bool incluirPalestrantes = false)
     {
         IQueryable<Evento> query = _context.Eventos
+            .AsNoTracking()
             .Include(e => e.Lotes)
             .Include(e => e.RedesSociais);
 

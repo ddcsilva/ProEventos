@@ -1,5 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using ProEventos.Application.Services;
 using ProEventos.Data.Contexts;
+using ProEventos.Data.Repositories;
+using ProEventos.Domain.Helpers;
+using ProEventos.Domain.Interfaces.Helpers;
+using ProEventos.Domain.Interfaces.Repositories;
+using ProEventos.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +15,12 @@ builder.Services.AddDbContext<ProEventosContext>(options =>
 
 // Adiciona o supporte a controllers
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<INotificador, Notificador>();
+builder.Services.AddScoped<IEventoService, EventoService>();
+builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+
+
 // Adiciona o suporte ao CORS
 builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();

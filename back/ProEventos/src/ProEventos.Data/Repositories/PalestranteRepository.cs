@@ -12,6 +12,7 @@ public class PalestranteRepository : Repository<Palestrante>, IPalestranteReposi
     public async Task<Palestrante[]> ObterTodosPalestrantesAsync(bool incluirEventos = false)
     {
         IQueryable<Palestrante> query = _context.Palestrantes
+            .AsNoTracking()
             .Include(p => p.RedesSociais);
 
         if (incluirEventos)
@@ -29,6 +30,7 @@ public class PalestranteRepository : Repository<Palestrante>, IPalestranteReposi
     public async Task<Palestrante> ObterPalestrantePorIdAsync(int palestranteId, bool incluirEventos = false)
     {
         IQueryable<Palestrante> query = _context.Palestrantes
+            .AsNoTracking()
             .Include(p => p.RedesSociais);
 
         if (incluirEventos)
@@ -48,6 +50,7 @@ public class PalestranteRepository : Repository<Palestrante>, IPalestranteReposi
     public async Task<Palestrante[]> ObterTodosPalestrantesPorNomeAsync(string nome, bool incluirEventos = false)
     {
         IQueryable<Palestrante> query = _context.Palestrantes
+            .AsNoTracking()
             .Include(p => p.RedesSociais);
 
         if (incluirEventos)

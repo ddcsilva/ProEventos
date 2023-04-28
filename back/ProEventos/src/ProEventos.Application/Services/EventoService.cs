@@ -10,7 +10,7 @@ public class EventoService : BaseService, IEventoService
 {
     private readonly IEventoRepository _eventoRepository;
 
-    public EventoService(IEventoRepository eventoRepository, 
+    public EventoService(IEventoRepository eventoRepository,
                          INotificador notificador) : base(notificador)
     {
         _eventoRepository = eventoRepository;
@@ -24,7 +24,9 @@ public class EventoService : BaseService, IEventoService
     {
         if (!ExecutarValidacao(new EventoValidation(), evento)) return;
 
-        if (_eventoRepository.BuscarAsync(e => e.Tema == evento.Tema).Result.Any())
+        var eventosComMesmoTema = await _eventoRepository.BuscarAsync(e => e.Tema == evento.Tema);
+
+        if (eventosComMesmoTema.Any())
         {
             Notificar("Já existe um evento com este tema.");
             return;
@@ -37,7 +39,9 @@ public class EventoService : BaseService, IEventoService
     {
         if (!ExecutarValidacao(new EventoValidation(), evento)) return;
 
-        if (_eventoRepository.BuscarAsync(e => e.Tema == evento.Tema && e.Id != evento.Id).Result.Any())
+        var eventosComMesmoTema = await _eventoRepository.BuscarAsync(e => e.Tema == evento.Tema && e.Id != evento.Id);
+
+        if (eventosComMesmoTema.Any())
         {
             Notificar("Já existe um evento com este tema.");
             return;
@@ -48,7 +52,9 @@ public class EventoService : BaseService, IEventoService
 
     public async Task RemoverAsync(int id)
     {
-        if (_eventoRepository.BuscarAsync(e => e.Id == id).Result.Any())
+        var evento = await _eventoRepository.ObterEventoPorIdAsync(id, false);
+
+        if (evento == null)
         {
             Notificar("Não foi possível encontrar o evento.");
             return;
@@ -59,23 +65,35 @@ public class EventoService : BaseService, IEventoService
 
     public async Task<IEnumerable<Evento>> ObterTodosEventosAsync(bool incluirPalestrantes = false)
     {
-        return await _eventoRepository.ObterTodosEventosAsync(incluirPalestrantes);
-    }
+        var eventos = await _eventoRepository.ObterTodosEventosAsync(incluirPalestrantes);
 
-    public async Task<Evento> ObterEventoPorIdAsync(int eventoId, bool incluirPalestrantes = false)
-    {
-        if (_eventoRepository.BuscarAsync(e => e.Id == eventoId).Result.Any())
+        if (eventos == null)
         {
             Notificar("Não foi possível encontrar o evento.");
             return null;
         }
 
-        return await _eventoRepository.ObterEventoPorIdAsync(eventoId, incluirPalestrantes);
+        return eventos;
+    }
+
+    public async Task<Evento> ObterEventoPorIdAsync(int id, bool incluirPalestrantes = false)
+    {
+        var evento = await _eventoRepository.ObterEventoPorIdAsync(id, incluirPalestrantes);
+
+        if (evento == null)
+        {
+            Notificar("Não foi possível encontrar o evento.");
+            return null;
+        }
+
+        return evento;
     }
 
     public async Task<IEnumerable<Evento>> ObterTodosEventosPorTemaAsync(string tema, bool incluirPalestrantes = false)
     {
-        if (_eventoRepository.BuscarAsync(e => e.Tema == tema).Result.Any())
+        var eventos = await _eventoRepository.ObterTodosEventosPorTemaAsync(tema, incluirPalestrantes);
+
+        if (eventos == null)
         {
             Notificar("Não foi possível encontrar o evento.");
             return null;
@@ -87,6 +105,6 @@ public class EventoService : BaseService, IEventoService
             return null;
         }
 
-        return await _eventoRepository.ObterTodosEventosPorTemaAsync(tema, incluirPalestrantes);
+        return eventos;
     }
 }
