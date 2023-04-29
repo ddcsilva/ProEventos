@@ -16,8 +16,10 @@
   <thead class="table-dark">
     <tr>
       <!-- O evento click do botão chama o método alternarImagem() -->
-      <th class="text-center" scope="col"><button class="btn btn-outline-light btn-sm"
-          (click)="alternarImagem()">{{!mostrarImagem ? 'Mostrar' : 'Ocultar'}}</button></th>
+      <th class="text-center" scope="col"><button class="btn btn-outline-light btn-sm" (click)="alternarImagem()">
+          <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
+          {{mostrarImagem ? 'Ocultar' : 'Exibir'}}
+        </button></th>
       <th class="text-center" scope="col">#</th>
       <th class="text-center" scope="col">Tema</th>
       <th class="text-center" scope="col">Local</th>
@@ -43,10 +45,14 @@
       <td class="text-center">{{evento.local}}</td>
       <td class="text-center">{{evento.dataEvento}}</td>
       <td class="text-center">{{evento.quantidadePessoas}}</td>
-      <td class="text-center"></td>
+      <td class="text-center">{{evento.lotes[0].nome}}</td>
       <td class="text-center">
-        <button class="btn btn-primary btn-sm me-2">Editar</button>
-        <button class="btn btn-danger btn-sm">Excluir</button>
+        <button class="btn btn-primary btn-sm me-2">
+          <i class="fa fa-edit"></i>
+        </button>
+        <button class="btn btn-danger btn-sm">
+          <i class="fa fa-trash"></i>
+        </button>
       </td>
     </tr>
 
