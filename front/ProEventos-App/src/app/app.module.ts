@@ -25,7 +25,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 // Componentes criados
 import { EventosComponent } from './components/eventos/eventos.component';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './shared/nav/nav.component';
 import { EventoService } from './services/evento.service';
 import { DateTimeFormatPipe } from './helpers/dateTimeFormat.pipe';
 import { TituloComponent } from './shared/titulo/titulo.component';
