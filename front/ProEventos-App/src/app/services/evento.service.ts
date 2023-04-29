@@ -1,16 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { Evento } from '../models/evento';
+import { AppConfig } from '../config/app-config';
 
-// Anotação para que o serviço possa ser injetado em outros componentes
 @Injectable()
-// Classe que representa o serviço de eventos
 export class EventoService {
-  baseUrl = 'https://localhost:5001/api/eventos';
+  baseUrl = `${AppConfig.apiUrl}eventos`;
 
   constructor(private http: HttpClient) { }
 
-  // Método para retornar os eventos
-  public getEventos(): any {
-    return this.http.get(this.baseUrl);
+  getEventos(): Observable<Evento[]> {
+    return this.http.get<any>(this.baseUrl).pipe(
+      map((response) => response.data)
+    );
+  }  
+
+  public getEventosPorTema(tema: string): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${this.baseUrl}/tema/${tema}`);
+  }
+
+  public getEventoById(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`${this.baseUrl}/${id}`);
   }
 }

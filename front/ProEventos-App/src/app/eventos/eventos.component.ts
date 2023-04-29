@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { EventoService } from '../services/evento.service';
+import { Evento } from '../models/evento';
 
 @Component({
   selector: 'app-eventos',
@@ -9,58 +9,52 @@ import { EventoService } from '../services/evento.service';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
+  public eventos: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
   public tamanhoImagem: number = 150;
   public margemImagem: number = 2;
   public mostrarImagem: boolean = true;
 
-  private _filtroLista: string = '';
+  private filtroListado: string = '';
 
   public get filtroLista(): string {
-    return this._filtroLista;
+    return this.filtroListado;
   }
 
-  // Se a propriedade filtroLista tiver um valor, o método filtrarEventos() é executado
-  public set filtroLista(value: string) {
-    this._filtroLista = value;
+ public set filtroLista(value: string) {
+    this.filtroListado = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
 
-  // Método para filtrar os eventos
-  public filtrarEventos(filtrarPor: string): any {
-    // toLocaleLowerCase() converte a string para minúsculo
+  public filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
-    // filter() filtra os elementos de um array
-    // indexOf() retorna o índice da primeira ocorrência do valor especificado
+
     return this.eventos.filter(
-      (evento: { tema: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      (evento: Evento) => evento.tema.toLocaleLowerCase().includes(filtrarPor)
     );
   }
 
   constructor(private eventoService: EventoService) { }
 
-  // Método executado sempre que o componente é iniciado
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getEventos();
   }
 
-  // Método para alternar a visibilidade da imagem
-  alternarImagem(): void {
+  public alternarImagem(): void {
     this.mostrarImagem = !this.mostrarImagem;
   }
 
   public getEventos(): void {
-    // Subscribe é um método que fica escutando o retorno do método get
     this.eventoService.getEventos().subscribe({
-      // Se o retorno for bem sucedido, o método next é executado
-      next: (response: any) => {
+      next: (response: Evento[]) => {
         this.eventos = response;
         this.eventosFiltrados = this.eventos;
       },
-      // Se ocorrer algum erro, o método error é executado
       error: (error: any) => {
         console.log(error);
+      },
+      complete: () => {
+        console.log('Carregamento dos eventos concluído com sucesso.');
       }
     });
   }
