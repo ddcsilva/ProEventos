@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 // Componentes criados
 import { EventosComponent } from './eventos/eventos.component';
@@ -43,7 +44,8 @@ import { DateTimeFormatPipe } from './helpers/dateTimeFormat.pipe';
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   // Responsável por importar os provedores de serviços
   providers: [

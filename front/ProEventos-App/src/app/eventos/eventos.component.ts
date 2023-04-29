@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/evento';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-eventos',
@@ -8,6 +9,7 @@ import { Evento } from '../models/evento';
   styleUrls: ['./eventos.component.scss']
 })
 export class EventosComponent implements OnInit {
+  public modalRef: BsModalRef | undefined;
 
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
@@ -21,7 +23,7 @@ export class EventosComponent implements OnInit {
     return this.filtroListado;
   }
 
- public set filtroLista(value: string) {
+  public set filtroLista(value: string) {
     this.filtroListado = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
   }
@@ -34,7 +36,10 @@ export class EventosComponent implements OnInit {
     );
   }
 
-  constructor(private eventoService: EventoService) { }
+  constructor(
+    private eventoService: EventoService,
+    private modalService: BsModalService
+  ) { }
 
   public ngOnInit(): void {
     this.getEventos();
@@ -57,5 +62,17 @@ export class EventosComponent implements OnInit {
         console.log('Carregamento dos eventos concluído com sucesso.');
       }
     });
+  }
+
+  openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  confirm(): void {
+    this.modalRef?.hide();
+  }
+
+  decline(): void {
+    this.modalRef?.hide();
   }
 }
