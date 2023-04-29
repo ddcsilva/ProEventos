@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { EventoService } from '../services/evento.service';
 
 @Component({
   selector: 'app-eventos',
@@ -37,7 +38,7 @@ export class EventosComponent implements OnInit {
     );
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private eventoService: EventoService) { }
 
   // Método executado sempre que o componente é iniciado
   ngOnInit(): void {
@@ -51,7 +52,7 @@ export class EventosComponent implements OnInit {
 
   public getEventos(): void {
     // Subscribe é um método que fica escutando o retorno do método get
-    this.http.get('https://localhost:5001/api/eventos').subscribe({
+    this.eventoService.getEventos().subscribe({
       // Se o retorno for bem sucedido, o método next é executado
       next: (response: any) => {
         this.eventos = response;

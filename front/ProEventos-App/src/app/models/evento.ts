@@ -1,4 +1,4 @@
-import { Lote } from "./Lote";
+import { Lote } from "./lote";
 import { Palestrante } from "./palestrante";
 import { RedeSocial } from "./redeSocial";
 
