@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { EventosComponent } from './eventos/eventos.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { NavComponent } from './nav/nav.component';
+import { EventoService } from './services/evento.service';
 
 @NgModule({
   // Responsável por declarar os componentes
@@ -38,7 +39,9 @@ import { NavComponent } from './nav/nav.component';
     FormsModule
   ],
   // Responsável por importar os provedores de serviços
-  providers: [],
+  providers: [
+    EventoService
+  ],
   // Responsável por fazer o bootstrap da aplicação
   bootstrap: [AppComponent]
 })
