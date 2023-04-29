@@ -47,7 +47,26 @@ public class EventoService : BaseService, IEventoService
             return;
         }
 
-        await _eventoRepository.AtualizarAsync(evento);
+        var eventoAtual = await _eventoRepository.ObterEventoPorIdAsync(evento.Id, false);
+
+        if (eventoAtual == null)
+        {
+            Notificar("Não foi possível encontrar o evento.");
+            return;
+        }
+
+        eventoAtual.Tema = evento.Tema;
+        eventoAtual.Local = evento.Local;
+        eventoAtual.DataEvento = evento.DataEvento;
+        eventoAtual.QuantidadePessoas = evento.QuantidadePessoas;
+        eventoAtual.ImagemURL = evento.ImagemURL;
+        eventoAtual.Telefone = evento.Telefone;
+        eventoAtual.Email = evento.Email;
+        eventoAtual.Lotes = evento.Lotes;
+        eventoAtual.RedesSociais = evento.RedesSociais;
+        eventoAtual.PalestrantesEventos = evento.PalestrantesEventos;
+
+        await _eventoRepository.AtualizarAsync(eventoAtual);
     }
 
     public async Task RemoverAsync(int id)

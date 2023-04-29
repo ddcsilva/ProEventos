@@ -125,19 +125,9 @@ public class EventosController : MainController
                 return CustomResponse();
             }
 
-            var eventoAtualizado = await _eventoService.ObterEventoPorIdAsync(id);
-
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            eventoAtualizado.Tema = evento.Tema;
-            eventoAtualizado.Local = evento.Local;
-            eventoAtualizado.QuantidadePessoas = evento.QuantidadePessoas;
-            eventoAtualizado.DataEvento = evento.DataEvento;
-            eventoAtualizado.ImagemURL = evento.ImagemURL;
-            eventoAtualizado.Telefone = evento.Telefone;
-            eventoAtualizado.Email = evento.Email;
-
-            await _eventoService.AtualizarAsync(eventoAtualizado);
+            await _eventoService.AtualizarAsync(evento);
 
             return CustomResponse(evento);
         }

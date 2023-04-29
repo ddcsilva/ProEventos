@@ -14,7 +14,8 @@ builder.Services.AddDbContext<ProEventosContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Adiciona o supporte a controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddScoped<INotificador, Notificador>();
 builder.Services.AddScoped<IEventoService, EventoService>();
