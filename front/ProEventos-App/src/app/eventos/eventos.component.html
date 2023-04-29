@@ -43,7 +43,7 @@
       <th class="text-center" scope="row">{{evento.id}}</th>
       <td class="text-center">{{evento.tema}}</td>
       <td class="text-center">{{evento.local}}</td>
-      <td class="text-center">{{evento.dataEvento}}</td>
+      <td class="text-center">{{evento.dataEvento | dateTimeFormat}}</td>
       <td class="text-center">{{evento.quantidadePessoas}}</td>
       <td class="text-center">{{evento.lotes[0].nome}}</td>
       <td class="text-center">

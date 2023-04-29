@@ -20,6 +20,7 @@ import { EventosComponent } from './eventos/eventos.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { NavComponent } from './nav/nav.component';
 import { EventoService } from './services/evento.service';
+import { DateTimeFormatPipe } from './helpers/dateTimeFormat.pipe';
 
 @NgModule({
   // Responsável por declarar os componentes
@@ -27,7 +28,8 @@ import { EventoService } from './services/evento.service';
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
-    NavComponent
+    NavComponent,
+    DateTimeFormatPipe
   ],
   // Responsável por importar os módulos
   imports: [
