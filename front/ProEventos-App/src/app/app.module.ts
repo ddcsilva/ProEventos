@@ -23,18 +23,26 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Componentes criados
-import { EventosComponent } from './eventos/eventos.component';
-import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { EventosComponent } from './components/eventos/eventos.component';
+import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
 import { NavComponent } from './nav/nav.component';
 import { EventoService } from './services/evento.service';
 import { DateTimeFormatPipe } from './helpers/dateTimeFormat.pipe';
+import { TituloComponent } from './shared/titulo/titulo.component';
+import { ContatosComponent } from './components/contatos/contatos.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   // Responsável por declarar os componentes
   declarations: [
     AppComponent,
+    TituloComponent,
+    PerfilComponent,
+    DashboardComponent,
     EventosComponent,
     PalestrantesComponent,
+    ContatosComponent,
     NavComponent,
     DateTimeFormatPipe
   ],
