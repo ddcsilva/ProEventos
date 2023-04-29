@@ -10,10 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // Responsável por fazer as animações
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Responsável por fazer o menu com efeito de collapse
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 // Responsável por permitir a utilização de formulários
 import { FormsModule } from '@angular/forms';
+
+// Responsável por fazer o menu com efeito de collapse
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 // Componentes criados
 import { EventosComponent } from './eventos/eventos.component';
@@ -34,11 +37,13 @@ import { DateTimeFormatPipe } from './helpers/dateTimeFormat.pipe';
   // Responsável por importar os módulos
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
-    FormsModule
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   // Responsável por importar os provedores de serviços
   providers: [
