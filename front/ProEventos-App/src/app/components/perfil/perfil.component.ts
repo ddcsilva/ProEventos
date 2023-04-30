@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
+// Classe responsável por gerenciar o componente de perfil
 export class PerfilComponent implements OnInit {
 
   constructor() { }

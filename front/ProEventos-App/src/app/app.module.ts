@@ -32,6 +32,7 @@ import { TituloComponent } from './shared/titulo/titulo.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { FiltroEventosPipe } from './helpers/filtro-eventos.pipe';
 
 @NgModule({
   // Responsável por declarar os componentes
@@ -44,7 +45,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     PalestrantesComponent,
     ContatosComponent,
     NavComponent,
-    DateTimeFormatPipe
+    DateTimeFormatPipe,
+    FiltroEventosPipe
   ],
   // Responsável por importar os módulos
   imports: [

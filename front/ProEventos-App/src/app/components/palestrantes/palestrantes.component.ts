@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './palestrantes.component.html',
   styleUrls: ['./palestrantes.component.scss']
 })
+// Classe responsável por gerenciar o componente de palestrantes
 export class PalestrantesComponent implements OnInit {
 
   constructor() { }
