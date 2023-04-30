@@ -11,13 +11,14 @@
           <label class="input-group-text">Filtro</label>
           <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="filtroLista" />
           <div class="input-group-append">
-            <button class="btn btn-primary" >
-              <i class="fa fa-plus"></i>
+            <button class="btn btn-primary">
+              <i class="fa fa-plus"></i> Novo
             </button>
           </div>
         </div>
       </div>
-      
+
+
     </div>
     <hr>
 
@@ -26,36 +27,32 @@
         <thead class="table-dark">
           <tr>
             <!-- O evento click do botão chama o método alternarImagem() -->
-            <th class="text-center" scope="col"><button class="btn btn-outline-light btn-sm" (click)="alternarImagem()">
-                <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
-                {{mostrarImagem ? 'Ocultar' : 'Exibir'}}
-              </button></th>
-            <th class="text-center" scope="col">#</th>
+            <th class="text-center d-none d-lg-table-cell" scope="col"><button class="btn btn-outline-light btn-sm" (click)="alternarImagem()">
+              <i class="{{mostrarImagem ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
+              {{mostrarImagem ? 'Ocultar' : 'Exibir'}}
+            </button></th>
             <th class="text-center" scope="col">Tema</th>
-            <th class="text-center" scope="col">Local</th>
+            <th class="text-center d-none d-md-table-cell" scope="col">Local</th>
             <th class="text-center" scope="col">Data</th>
-            <th class="text-center" scope="col">Pessoas</th>
-            <th class="text-center" scope="col">Lote</th>
+            <th class="text-center d-none d-md-table-cell" scope="col">Pessoas</th>
+            <th class="text-center d-none d-md-table-cell" scope="col">Lote</th>
             <th class="text-center" scope="col">Opções</th>
           </tr>
         </thead>
         <tbody>
           <!-- O *ngFor é uma diretiva que faz o loop dos elementos de uma coleção -->
           <tr *ngFor="let evento of eventos | filtroEventos:filtroLista">
-            <td class="text-center">
-              <!-- Se a variável mostrarImagem for verdadeira, a imagem é exibida e animada -->
+            <td class="text-center d-none d-lg-table-cell">
               <div [collapse]="!mostrarImagem" [isAnimated]="true">
-                <!-- As propriedades [style.width.px] e [style.margin.px] são diretivas que permitem alterar o estilo de um elemento HTML -->
                 <img class="thumbnail" src="/assets/images/{{evento.imagemURL}}" [style.width.px]="tamanhoImagem"
                   [style.margin.px]="margemImagem" alt="Imagem do evento">
               </div>
             </td>
-            <th class="text-center" scope="row">{{evento.id}}</th>
             <td class="text-center">{{evento.tema}}</td>
-            <td class="text-center">{{evento.local}}</td>
+            <td class="text-center d-none d-md-table-cell">{{evento.local}}</td>
             <td class="text-center">{{evento.dataEvento | dateTimeFormat}}</td>
-            <td class="text-center">{{evento.quantidadePessoas}}</td>
-            <td class="text-center">{{evento.lotes[0].nome}}</td>
+            <td class="text-center d-none d-md-table-cell">{{evento.quantidadePessoas}}</td>
+            <td class="text-center d-none d-md-table-cell">{{evento.lotes[0].nome}}</td>
             <td class="text-center">
               <div class="btn-group">
                 <button class="btn btn-primary btn-sm me-2" data-bs-toggle="tooltip" data-bs-placement="top"
