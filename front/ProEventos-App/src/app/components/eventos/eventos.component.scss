@@ -9,3 +9,10 @@
     min-height: calc(150px * 2 / 4);
     object-fit: cover;
 }
+
+/* Estilo específico do componente Evento */
+.evento-container {
+    .input-group {
+        flex-grow: 1;
+    }
+}
