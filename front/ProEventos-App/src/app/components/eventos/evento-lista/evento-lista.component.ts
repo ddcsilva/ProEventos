@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { FiltroEventosPipe } from 'src/app/helpers/filtro-eventos.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-evento-lista',
@@ -33,7 +34,8 @@ export class EventoListaComponent implements OnInit {
     private eventoService: EventoService,
     private modalService: BsModalService,
     private toastrService: ToastrService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -61,6 +63,10 @@ export class EventoListaComponent implements OnInit {
 
   public recusar(): void {
     this.modalRef?.hide();
+  }
+
+  public abrirDetalhesEvento(id: number): void {
+    this.router.navigate([`/eventos/detalhe/${id}`]);
   }
 
   // Getters e Setters

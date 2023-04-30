@@ -10,6 +10,7 @@ import { EventoListaComponent } from './components/eventos/evento-lista/evento-l
 
 // Constante que define as rotas da aplicação
 const routes: Routes = [
+  { path: 'eventos', redirectTo: 'eventos/lista' },
   { 
     path: 'eventos', component: EventosComponent,
     children: [
