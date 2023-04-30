@@ -35,6 +35,9 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { FiltroEventosPipe } from './helpers/filtro-eventos.pipe';
 import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { LoginComponent } from './components/usuarios/login/login.component';
+import { RegistroComponent } from './components/usuarios/registro/registro.component';
 
 @NgModule({
   // Responsável por declarar os componentes
@@ -50,7 +53,10 @@ import { EventoListaComponent } from './components/eventos/evento-lista/evento-l
     DateTimeFormatPipe,
     FiltroEventosPipe,
     EventoDetalheComponent,
-    EventoListaComponent
+    EventoListaComponent,
+    UsuariosComponent,
+    LoginComponent,
+    RegistroComponent
   ],
   // Responsável por importar os módulos
   imports: [
