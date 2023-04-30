@@ -33,6 +33,8 @@ import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { FiltroEventosPipe } from './helpers/filtro-eventos.pipe';
+import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
+import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 
 @NgModule({
   // Responsável por declarar os componentes
@@ -46,7 +48,9 @@ import { FiltroEventosPipe } from './helpers/filtro-eventos.pipe';
     ContatosComponent,
     NavComponent,
     DateTimeFormatPipe,
-    FiltroEventosPipe
+    FiltroEventosPipe,
+    EventoDetalheComponent,
+    EventoListaComponent
   ],
   // Responsável por importar os módulos
   imports: [
